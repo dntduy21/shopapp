@@ -1,15 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { UserResponse } from 'src/app/responses/user/user.response';
-import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
+import { UserResponse } from '../../responses/user/user.response';
+import { TokenService } from '../../services/token.service';
+import {RouterModule} from "@angular/router";
+import { adminRoutes } from './admin-routes';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { provideRouter } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: [
     './admin.component.scss',        
-  ]
+  ],  
+  standalone: true,
+  imports: [       
+    CommonModule,    
+    RouterModule,
+    //FormsModule
+  ],
+  
+  
 })
 export class AdminComponent implements OnInit {
   //adminComponent: string = 'orders';
@@ -23,8 +36,11 @@ export class AdminComponent implements OnInit {
    }
   ngOnInit() {
     this.userResponse = this.userService.getUserResponseFromLocalStorage();    
-    //default router
-    this.router.navigate(['/admin/orders']);
+    // Default router
+    debugger
+    if (this.router.url === '/admin') {
+      this.router.navigate(['/admin/orders']);
+    }
    }  
   logout() {
     this.userService.removeUserFromLocalStorage();
@@ -33,17 +49,16 @@ export class AdminComponent implements OnInit {
     this.router.navigate(['/']);
   }
   showAdminComponent(componentName: string): void {
-    //this.adminComponent = componentName;orders,categories
-    if(componentName=='orders') {
+    if (componentName === 'orders') {
       this.router.navigate(['/admin/orders']);
-    } else if(componentName=='categories') {
+    } else if (componentName === 'categories') {
       this.router.navigate(['/admin/categories']);
-    }else if(componentName=='products') {
+    } else if (componentName === 'products') {
       this.router.navigate(['/admin/products']);
     }
-    
   }
 }
+
 
 /**
  npm install --save font-awesome
@@ -51,5 +66,4 @@ export class AdminComponent implements OnInit {
  "styles": [   
     "node_modules/font-awesome/css/font-awesome.min.css"
 ],
-
  */

@@ -17,24 +17,29 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductResponse extends BaseResponse{
+public class ProductResponse extends BaseResponse {
     private Long id;
     private String name;
     private Float price;
+    private Integer quantity;
     private String thumbnail;
     private String description;
+    private boolean visible;
     @JsonProperty("product_images")
     private List<ProductImage> productImages = new ArrayList<>();
 
     @JsonProperty("category_id")
     private Long categoryId;
+
     public static ProductResponse fromProduct(Product product) {
         ProductResponse productResponse = ProductResponse.builder()
                 .id(product.getId())
                 .name(product.getName())
                 .price(product.getPrice())
+                .quantity(product.getQuantity())
                 .thumbnail(product.getThumbnail())
                 .description(product.getDescription())
+                .visible(product.isVisible())
                 .categoryId(product.getCategory().getId())
                 .productImages(product.getProductImages())
                 .build();

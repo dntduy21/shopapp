@@ -18,11 +18,11 @@
 }
 
 #sidebar {
-    background-color: #333 !important;
+    background-color: #898585 !important;
     /* Primary color */
     color: white;
     /* Text color */
-    height: 100vh;
+    height: auto;
     overflow-y: auto;
     /* Add scrollbars if content overflows */
 }
@@ -41,11 +41,12 @@
 #sidebar a.active {
     font-weight: bold;
     /* Highlight active link */
+    background-color: #141313;
 }
 
 /* Change background color on hover */
 #sidebar a:hover {
-    background-color: #000;
+    background-color: #141313;
     /* Change the background color on hover */
 }
 

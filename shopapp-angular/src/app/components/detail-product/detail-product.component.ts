@@ -1,16 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/services/product.service';
-import { CartService } from 'src/app/services/cart.service';
-import { CategoryService } from 'src/app/services/category.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/product';
-import { ProductImage } from 'src/app/models/product.image';
-import { environment } from 'src/environments/environment';
+import { ProductService } from '../../services/product.service';
+import { CartService } from '../../services/cart.service';
+import { environment } from '../../../environments/environment';
+import { ProductImage } from '../../models/product.image';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
+import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-detail-product',
   templateUrl: './detail-product.component.html',
-  styleUrls: ['./detail-product.component.scss']
+  styleUrls: ['./detail-product.component.scss'],
+  standalone: true,
+  imports: [
+    FooterComponent,
+    HeaderComponent,
+    CommonModule,
+    NgbModule
+  ]
 })
 
 export class DetailProductComponent implements OnInit {
@@ -18,6 +29,7 @@ export class DetailProductComponent implements OnInit {
   productId: number = 0;
   currentImageIndex: number = 0;
   quantity: number = 1;
+  isPressedAddToCart:boolean = false;
   constructor(
     private productService: ProductService,
     private cartService: CartService,
@@ -48,7 +60,8 @@ export class DetailProductComponent implements OnInit {
               });
             }            
             debugger
-            this.product = response 
+            this.product = response;
+            console.log(this.product);
             // Bắt đầu với ảnh đầu tiên
             this.showImage(0);
           },
@@ -94,6 +107,7 @@ export class DetailProductComponent implements OnInit {
     }      
     addToCart(): void {
       debugger
+      this.isPressedAddToCart = true;
       if (this.product) {
         this.cartService.addToCart(this.product.id, this.quantity);
       } else {
@@ -103,6 +117,12 @@ export class DetailProductComponent implements OnInit {
     }    
         
     increaseQuantity(): void {
+      debugger
+      if((this.quantity+1) > this.product!.quantity)
+      {
+        alert("Vượt quá số lượng sản phẩm hiện còn!");
+        return;
+      }
       this.quantity++;
     }
     
@@ -111,8 +131,16 @@ export class DetailProductComponent implements OnInit {
         this.quantity--;
       }
     }
-    
+    getTotalPrice(): number {
+      if (this.product) {
+        return this.product.price * this.quantity;
+      }
+      return 0;
+    }
     buyNow(): void {      
+      if(this.isPressedAddToCart == false) {
+        this.addToCart();
+      }
       this.router.navigate(['/orders']);
     }    
 }

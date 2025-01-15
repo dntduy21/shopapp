@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Product extends BaseEntity{
+public class Product extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,11 +24,16 @@ public class Product extends BaseEntity{
 
     private Float price;
 
+    private Integer quantity;
+
     @Column(name = "thumbnail", length = 300)
     private String thumbnail;
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "visible")
+    private boolean visible;
 
     @ManyToOne
     @JoinColumn(name = "category_id")

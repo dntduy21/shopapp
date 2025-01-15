@@ -7,8 +7,11 @@ export interface Product {
   description: string;
   category_id: number;
   url: string;
+  quantity: number;
+  visible: boolean;
   product_images: ProductImage[];
+  numberImg?: number;
+  numberImg1?: number;
 }
 
-  
-  
+

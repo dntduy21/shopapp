@@ -12,11 +12,26 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { TokenService } from '../../services/token.service';
 import { UserResponse } from '../../responses/user/user.response';
-import { UpdateUserDTO } from 'src/app/dtos/user/update.user.dto';
+import { UpdateUserDTO } from '../../dtos/user/update.user.dto';
+
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
 @Component({
   selector: 'user-profile',
   templateUrl: './user.profile.component.html',
-  styleUrls: ['./user.profile.component.scss']
+  styleUrls: ['./user.profile.component.scss'],
+  standalone: true,
+  imports: [
+    FooterComponent,
+    HeaderComponent,
+    CommonModule,
+    FormsModule, 
+    ReactiveFormsModule,   
+  ],
 })
 export class UserProfileComponent implements OnInit {
   userResponse?: UserResponse;

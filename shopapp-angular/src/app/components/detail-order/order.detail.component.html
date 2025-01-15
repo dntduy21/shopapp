@@ -2,11 +2,11 @@
 <div class="container">
     <div class="intro-section">
         <h1>Chi tiết đơn hàng</h1>
-        <p>Xem thông tin chi tiết đơn hàng</p>
     </div>
-    
+
     <!-- Thông tin người nhận -->
-    <div *ngIf="orderResponse" class="row">
+    @if(orderResponse) {
+    <div class="row">
         <div class="col-md-6">
             <h2 class="product-header">Thông tin người nhận</h2>
             <div class="mb-3">
@@ -30,7 +30,7 @@
             </div>
             <div class="mb-3">
                 <p class="form-label">Phương thức thanh toán: {{ orderResponse.payment_method }}</p>
-            </div>                        
+            </div>
         </div>
 
         <!-- Sản phẩm đã đặt hàng -->
@@ -46,7 +46,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of orderResponse.order_details">
+                    @for(item of orderResponse.order_details; track item.product.name) {
+                    <tr>
                         <td>
                             <div class="product-info">
                                 <img [src]="item.product.thumbnail" alt="Product Image" class="product-image">
@@ -57,12 +58,14 @@
                         <td>{{ item.price | number:'1.2-2' }}</td>
                         <td>{{ item.total_money | number:'1.2-2' }}</td>
                     </tr>
+                    }
                 </tbody>
             </table>
             <div class="text-start mt-3">
                 <h4 class="header-text text-end">Tổng giá: {{ orderResponse.total_money | number:'1.2-2' }}</h4>
-            </div>            
+            </div>
         </div>
     </div>
+    }
 </div>
 <app-footer></app-footer>

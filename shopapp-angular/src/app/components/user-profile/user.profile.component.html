@@ -10,11 +10,13 @@
                     class="form-control" 
                     id="fullname" 
                     [class.is-invalid]="userProfileForm.get('fullname')!.invalid && userProfileForm.get('fullname')!.touched">
-                <div 
-                    *ngIf="userProfileForm.get('fullname')!.invalid && userProfileForm.get('fullname')!.touched" 
-                    class="invalid-feedback">
-                    Họ và tên là trường bắt buộc.
-                </div>
+                @if(userProfileForm.get('fullname')!.invalid &&  
+                  userProfileForm.get('fullname')!.touched) {
+                    <div                       
+                      class="invalid-feedback">
+                      Họ và tên là trường bắt buộc.
+                  </div>
+                  }                    
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address</label>
@@ -41,10 +43,12 @@
                        id="password" 
                        [class.is-invalid]="userProfileForm.get('password')!.invalid 
                         && userProfileForm.get('password')!.touched">
-                <div *ngIf="userProfileForm.get('password')!.invalid 
-                  && userProfileForm.get('password')!.touched" class="invalid-feedback">
-                  Mật khẩu ít nhất 3 ký tự.
-                </div>
+                @if(userProfileForm.get('password')!.invalid 
+                  && userProfileForm.get('password')!.touched) {
+                    <div class="invalid-feedback">
+                      Mật khẩu ít nhất 3 ký tự.
+                    </div>
+                  }                
               </div>              
               <div class="mb-3">
                 <label for="retype_password" class="form-label">Nhập lại mật khẩu</label>
@@ -56,10 +60,11 @@
                        id="retype_password" 
                        [class.is-invalid]="userProfileForm.get('retype_password')!.invalid 
                           && userProfileForm.get('retype_password')!.touched">
-                  <div *ngIf="userProfileForm.hasError('passwordMismatch')" 
-                  class="invalid-feedback">
-                    Mật khẩu không khớp.
-                  </div>
+                  @if(userProfileForm.hasError('passwordMismatch')) {
+                    <div class="invalid-feedback">
+                      Mật khẩu không khớp.
+                    </div>
+                  }                  
               </div>              
               <div class="text-center">
                 <button type="button" 

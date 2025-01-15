@@ -1,4 +1,5 @@
-import { OrderDetail } from "src/app/models/order.detail";
+import { OrderDetail } from "../../models/order.detail";
+
 export interface OrderResponse {
     id: number;
     user_id: number;

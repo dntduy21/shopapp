@@ -1,1 +1,38 @@
-<h1>This is Category Admin</h1>
+<div class="container">
+  <h1>Danh Mục</h1>
+  <div class="row">
+    <div class="col-md-8 ">
+      <button class="btn btn-success" (click)="insertCategory()"><i class="fa-solid fa-plus"></i></button>
+    </div>
+  </div>
+  <table class="table">
+    <thead class="table-light">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Use Angular's *ngFor directive to loop through categorys array -->
+      @for(category of categories; track category.id){
+      <tr>
+        <td>{{ category.id }}</td>
+        <td>{{ category.name }}</td>
+        <td>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-primary" (click)="updateCategory(category.id)">
+              <i class="fa-solid fa-pen-nib"></i>
+            </button>
+            <button class="btn btn-danger" (click)="deleteCategory(category)"><i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+      } @empty {
+      <h2>Không tìm thấy danh mục</h2>
+      }
+
+    </tbody>
+  </table>
+</div>

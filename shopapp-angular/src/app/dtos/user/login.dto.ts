@@ -20,5 +20,4 @@ export class LoginDTO {
         this.password = data.password;
         this.role_id = data.role_id
     }
-
 }

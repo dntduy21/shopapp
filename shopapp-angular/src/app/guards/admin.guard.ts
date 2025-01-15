@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivateFn } from '@angular/router';
-import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router'; // Đảm bảo bạn đã import Router ở đây.
 import { inject } from '@angular/core';
 import { of,Observable } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { UserResponse } from '../responses/user/user.response';
+import { TokenService } from '../services/token.service';
 
 @Injectable({
   providedIn: 'root'
