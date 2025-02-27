@@ -206,6 +206,4 @@ public class CategoryControllerTest {
                         .content(jsonBody))
                 .andExpect(status().isForbidden());
     }
-
-
 }
