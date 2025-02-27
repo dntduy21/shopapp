@@ -29,5 +29,3 @@ jwt:
   secretKey: TaqlmGv1iEDMRiFp/pHuID1+T84IABfuA0xXh4GhiUI=
 
 logging.level.org.springframework.security: DEBUG
-
-

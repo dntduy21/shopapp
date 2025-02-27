@@ -27,6 +27,10 @@ public class WebSecurityConfig {
     @Value("${api.prefix}")
     private String apiPrefix;
 
+    // Thêm property để xác định chế độ test
+    @Value("${app.test.mode:false}")
+    private boolean testMode;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -52,6 +56,7 @@ public class WebSecurityConfig {
                             .permitAll()
 
                             .requestMatchers(POST,
+                                    String.format("%s/categories", apiPrefix),
                                     String.format("%s/categories/**", apiPrefix))
                             .hasAnyRole(Role.ADMIN)
 
@@ -124,7 +129,9 @@ public class WebSecurityConfig {
 
                 })
                 .csrf(AbstractHttpConfigurer::disable);
-        http.securityMatcher(String.valueOf(EndpointRequest.toAnyEndpoint()));
+        if (!testMode) {
+            http.securityMatcher(String.valueOf(EndpointRequest.toAnyEndpoint()));
+        }
         return http.build();
     }
 }
